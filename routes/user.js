@@ -58,8 +58,8 @@ router.post('/signUp', (req, res) => {
             // Save newUser object to database
             newUser.save((err, User) => {
                 if (err) {
-                    return res.status(400).send({
-                        message: "Failed to add user"
+                    return res.status(500).send({
+                        message: "Internal server error"
                     });
                 } else {
                     return res.status(201).send({
@@ -71,11 +71,11 @@ router.post('/signUp', (req, res) => {
     });
 });
 
-router.get('/getUserDetails', (req, res) => {
+router.get('/getUserByEmail/:email', (req, res) => {
     // Find user with requested email
-    User.findOne({email: 'daniel.lasry9@gmail.com'}, {_id : 0, "__v" : 0, salt : 0, hash : 0}, (err, user) => {
+    User.findOne({email: req.params.email}, {_id : 0, "__v" : 0, salt : 0, hash : 0}, (err, user) => {
         if (user === null) {
-            return res.status(401).send({
+            return res.status(404).send({
                 message: "User not found"
             });
         } else {
