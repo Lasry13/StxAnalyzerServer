@@ -10,7 +10,6 @@ const mongoose = require('mongoose');
 
 const app = express();
 
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
@@ -20,10 +19,9 @@ app.use(express.json());
 app.use(express.urlencoded({extended: false}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-// Mongodb connection url
-const MONGODB_URI = "mongodb://localhost:27017/stxAnalyzer";
 
-// Connect to MongoDB
+
+const MONGODB_URI = "mongodb://localhost:27017/stxAnalyzer";
 mongoose.connect(MONGODB_URI, {useNewUrlParser: true, useUnifiedTopology: true});
 mongoose.connection.on('connected', () => {
     console.log('Connected to MongoDB @ 27017');
