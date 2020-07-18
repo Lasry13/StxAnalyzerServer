@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const crypto = require('crypto');
 
-// Creating user schema
 const UserSchema = mongoose.Schema({
     firstName: {
         type: String,
@@ -18,6 +17,12 @@ const UserSchema = mongoose.Schema({
     budget: {
         type: Number,
         required: true
+    },
+
+    spend: {
+        type: Number,
+        required : false,
+        default: 0
     },
     country: {
         type: String,

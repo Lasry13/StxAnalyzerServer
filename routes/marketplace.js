@@ -9,7 +9,8 @@ router.post('/addStocks', (req, res) => {
             console.log("Something wrong when updating data!");
         }
     });
-    res.json("ok")
+    res.status(200).send({
+    })
 });
 
 

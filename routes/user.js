@@ -86,4 +86,22 @@ router.get('/getUserByEmail/:email', (req, res) => {
     });
 });
 
+router.put('/updateDetails/:email', (req, res) => {
+    console.log(req.body)
+    // Find user with requested email
+    User.findOneAndUpdate({email: req.params.email}, {$set :
+            {firstName: req.body.user.firstName}, lastName: req.body.user.lastName,  country: req.body.user.country}
+            , {new: false} ,(err, user) => {
+        if (user === null) {
+            return res.status(404).send({
+                message: "User not found"
+            });
+        } else {
+            return res.status(200).send({
+                user
+            })
+        }
+    })
+});
+
 module.exports = router;
